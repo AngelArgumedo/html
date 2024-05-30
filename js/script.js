@@ -65,3 +65,63 @@ function moveToLeft() {
     
     
 }
+
+// Carrusel2
+const btnLeft2 = document.querySelector(".btn-left2"),
+      btnRight2 = document.querySelector(".btn-right2"),
+      slider2 = document.querySelector("#slider2"),
+      sliderSection2 = document.querySelectorAll(".slider-section2");
+
+btnLeft2.addEventListener("click", e => moveToLeft2());
+btnRight2.addEventListener("click", e => moveToRight2());
+
+// let interval2 = setInterval(() => {
+//     moveToRight2();
+// }, 999999999);
+
+let operacion2 = 0,
+    counter2 = 0,
+    widthImg2 = 100 / sliderSection2.length;
+
+function moveToRight2() {
+    if (counter2 >= sliderSection2.length - 1) {
+        counter2 = 0;
+        operacion2 = 0;
+        slider2.style.transform = `translate(-${operacion2}%)`;
+        slider2.style.transition = "none";
+        return;
+    } 
+    counter2++;
+    operacion2 += widthImg2;
+    slider2.style.transform = `translate(-${operacion2}%)`;
+    slider2.style.transition = "all ease .6s";
+}  
+
+function moveToLeft2() {
+    if (counter2 <= 0) {
+        counter2 = sliderSection2.length - 1;
+        operacion2 = widthImg2 * (sliderSection2.length - 1);
+        slider2.style.transform = `translate(-${operacion2}%)`;
+        slider2.style.transition = "none";
+        return;
+    } 
+    counter2--;
+    operacion2 -= widthImg2;
+    slider2.style.transform = `translate(-${operacion2}%)`;
+    slider2.style.transition = "all ease .6s";
+}
+
+// Pausar el auto-desplazamiento al interactuar con los botones
+btnLeft2.addEventListener('click', () => {
+    clearInterval(interval2);
+    interval2 = setInterval(() => {
+        moveToRight2();
+    }, 3000);
+});
+
+btnRight2.addEventListener('click', () => {
+    clearInterval(interval2);
+    interval2 = setInterval(() => {
+        moveToRight2();
+    }, 3000);
+});
